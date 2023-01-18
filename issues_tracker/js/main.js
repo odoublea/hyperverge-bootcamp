@@ -1,6 +1,6 @@
 document.getElementById('issueInputForm').addEventListener('submit', saveIssue);
 
-// UPDATE ISSUE
+// SAVE/UPDATE ISSUE
 function saveIssue(e) {
     let issueId = chance.guid();
     let issueDesc = document.getElementById('issueDescInput').value;
@@ -13,7 +13,12 @@ function saveIssue(e) {
         severity: issueSeverity,
         assignedTo: issueAssignedTo,
         status: issueStatus
-    }
+    };
+    console.log(issue);
+    console.log(issueDesc);
+    console.log(issueSeverity);
+    console.log(issueAssignedTo);
+    
     if (localStorage.getItem('issues') == null) {
         let issues = [];
         issues.push(issue);
@@ -44,8 +49,6 @@ function setStatusClosed(id) {
     fetchIssues();
 }
 
-{/* <a href="#" class="btn btn-danger" onclick="deleteIssue(\''+id'\')">Delete</a> */}
-
 // DELETE ISSUE
 function deleteIssue(id) {
     let issues = JSON.parse(localStorage.getItem('issues'));
@@ -66,7 +69,7 @@ function fetchIssues() {
     let issuesList = document.getElementById('issuesList');
 
     issuesList.innerHTML = '';
-
+    
     for (let i = 0; i < issues.length; i++) {
         let id = issues[i].id;
         let desc = issues[i].description;
@@ -74,12 +77,11 @@ function fetchIssues() {
         let assignedTo = issues[i].assignedTo;
         let status = issues[i].status;
 
-        issuesList.innerHTML += '<div class="well">' + '<h6>Issue ID: ' + id + '</h6>' + '<p><span class="label label-info">' + status + '</span></p>' + '<h3>' + desc + '</h3>' + '<p><span class="glyphicon glyphicon-time"></span>'
-        + severity + ' ' + '<span class="glyphicon glyphicon-user"></span>' + assignedTo + '</p>' + '<a href="#" class="btn btn-warning" onclick="setStatusClosed(\''+id+'\')">Close</a>' + '<a href="#" class="btn btn-danger" onclick="deleteIssue(\''+id+'\')">Delete</a>'+
-        '</div>';
+        issuesList.innerHTML += '<div class= "well p-3 bg-gray-400">' + '<h6>Issue ID: ' + id + '</h6>'+ '<p><span class="badge bg-info rounded shadow-sm p-2">'
+                                + status + '</span></p>'+ '<h3>' + desc + '</h3>'+ '<p><i class="bi bi-clock-fill"></i> '
+                                + severity + ' '+ '<button type="button" class="btn btn-success ms-2">' + '<i class="bi bi-person-fill me-2"></i>' +
+                                 assignedTo + '</button>' + '</p>'+ '<hr class="mt-1 mb-1"/>' +
+                                '<a href="#" class="btn btn-warning" onclick="setStatusClosed(\''+id+'\')">Close</a> '+
+                                '<a href="#" class="btn btn-danger ms-2" onclick="deleteIssue(\''+id+'\')">Delete</a>'+ '</div>' + '<hr class="mt-1 mb-1 border-2"/>';
     }
 }
-
-
-
-{/* <a href="#" class="btn btn-warning" onclick="setStatusClosed(\''+id'\')">Close</a> */}
