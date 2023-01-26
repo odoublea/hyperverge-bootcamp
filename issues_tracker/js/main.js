@@ -4,12 +4,14 @@ document.getElementById('issueInputForm').addEventListener('submit', saveIssue);
 function saveIssue(e) {
     let issueId = chance.guid();
     let issueDesc = document.getElementById('issueDescInput').value;
+    let issueSummary = document.getElementById('issueSummaryInput').value;
     let issueSeverity = document.getElementById('issueSeverityInput').value;
     let issueAssignedTo = document.getElementById('issueAssignedToInput').value;
     let issueStatus = 'Open';
     let issue = {
         id: issueId,
         description: issueDesc,
+        summary: issueSummary,
         severity: issueSeverity,
         assignedTo: issueAssignedTo,
         status: issueStatus
@@ -73,15 +75,39 @@ function fetchIssues() {
     for (let i = 0; i < issues.length; i++) {
         let id = issues[i].id;
         let desc = issues[i].description;
+        let summary = issues[i].summary;
         let severity = issues[i].severity;
         let assignedTo = issues[i].assignedTo;
         let status = issues[i].status;
 
         issuesList.innerHTML += '<div class= "well p-3 bg-gray-400">' + '<h6>Issue ID: ' + id + '</h6>'+ '<p><span class="badge bg-info rounded shadow-sm p-2">'
-                                + status + '</span></p>'+ '<h3>' + desc + '</h3>'+ '<p><i class="bi bi-clock-fill"></i> '
+                                + status + '</span></p>'+ '<h5>' + desc + '</h5>'  + '<p>' + summary + '</p>' + '<p><i class="bi bi-clock-fill"></i> '
                                 + severity + ' '+ '<button type="button" class="btn btn-success ms-2">' + '<i class="bi bi-person-fill me-2"></i>' +
                                  assignedTo + '</button>' + '</p>'+ '<hr class="mt-1 mb-1"/>' +
                                 '<a href="#" class="btn btn-warning" onclick="setStatusClosed(\''+id+'\')">Close</a> '+
                                 '<a href="#" class="btn btn-danger ms-2" onclick="deleteIssue(\''+id+'\')">Delete</a>'+ '</div>' + '<hr class="mt-1 mb-1 border-2"/>';
     }
 }
+
+
+// BOOTSTRAP
+
+(function () {
+    'use strict'
+  
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+  
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+  
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
