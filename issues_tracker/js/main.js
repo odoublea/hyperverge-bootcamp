@@ -1,25 +1,21 @@
-document.getElementById('issueInputForm').addEventListener('submit', saveIssue);
+document.querySelector("#issueInputForm").addEventListener('submit', saveIssue);
 
 // SAVE/UPDATE ISSUE
 function saveIssue(e) {
     let issueId = chance.guid();
-    let issueDesc = document.getElementById('issueDescInput').value;
-    let issueSummary = document.getElementById('issueSummaryInput').value;
-    let issueSeverity = document.getElementById('issueSeverityInput').value;
-    let issueAssignedTo = document.getElementById('issueAssignedToInput').value;
+    let issueDesc = document.querySelector("#issueDescInput");
+    let issueSummary = document.querySelector("#issueSummaryInput");
+    let issueSeverity = document.querySelector("#issueSeverityInput");
+    let issueAssignedTo = document.querySelector("#issueAssignedToInput");
     let issueStatus = 'Open';
     let issue = {
         id: issueId,
-        description: issueDesc,
-        summary: issueSummary,
-        severity: issueSeverity,
-        assignedTo: issueAssignedTo,
-        status: issueStatus
+        description: issueDesc.value,
+        summary: issueSummary.value,
+        severity: issueSeverity.value,
+        assignedTo: issueAssignedTo.value,
+        status: issueStatus.value
     };
-    console.log(issue);
-    console.log(issueDesc);
-    console.log(issueSeverity);
-    console.log(issueAssignedTo);
     
     if (localStorage.getItem('issues') == null) {
         let issues = [];
@@ -30,7 +26,7 @@ function saveIssue(e) {
         issues.push(issue);
         localStorage.setItem('issues', JSON.stringify(issues));
     }
-    document.getElementById('issueInputForm').reset();
+    document.querySelector("#issueInputForm").reset();
 
     fetchIssues();
 
@@ -68,7 +64,7 @@ function deleteIssue(id) {
 
 function fetchIssues() {
     let issues = JSON.parse(localStorage.getItem('issues'));
-    let issuesList = document.getElementById('issuesList');
+    let issuesList = document.querySelector("#issuesList");
 
     issuesList.innerHTML = '';
     
