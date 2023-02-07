@@ -14,18 +14,24 @@ function saveIssue(e) {
         summary: issueSummary.value,
         severity: issueSeverity.value,
         assignedTo: issueAssignedTo.value,
-        status: issueStatus.value
+        status: issueStatus
     };
     
-    if (localStorage.getItem('issues') == null) {
-        let issues = [];
-        issues.push(issue);
-        localStorage.setItem('issues', JSON.stringify(issues));
+    if (issue.description !== '') {
+        if (localStorage.getItem('issues') == null) {
+                let issues = [];
+                issues.push(issue);
+                localStorage.setItem('issues', JSON.stringify(issues));
+            } else {
+                let issues = JSON.parse(localStorage.getItem('issues'));
+                issues.push(issue);
+                localStorage.setItem('issues', JSON.stringify(issues));
+            }
     } else {
-        let issues = JSON.parse(localStorage.getItem('issues'));
-        issues.push(issue);
-        localStorage.setItem('issues', JSON.stringify(issues));
+        console.log("Fill the description")
+        // document.querySelector("#invalid-feedback").innerHTML
     }
+    
     document.querySelector("#issueInputForm").reset();
 
     fetchIssues();
@@ -101,6 +107,7 @@ function fetchIssues() {
           if (!form.checkValidity()) {
             event.preventDefault()
             event.stopPropagation()
+            event.
           }
   
           form.classList.add('was-validated')
