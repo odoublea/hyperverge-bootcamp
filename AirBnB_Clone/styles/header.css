@@ -1,0 +1,38 @@
+header {
+    background-color: #F7F7F7;
+    height: 70px;
+    width: 100%;
+    border-bottom: 1px #CCCCCC solid;
+}
+
+header #logo {
+    content: url('../images/Airbnb-Logo.png');
+    margin-left: 30px;
+    height: 50px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .search-bar,
+nav .user-dir {
+    display: flex;
+    /* justify-content: space-between; */
+}
+
+nav .search-bar span {
+    padding: 20px;
+}
+
+nav .user-dir span {
+    padding: 10px;
+}
+
+#search button {
+    /* height: 20px; */
+    padding: 20px;
+    background-color: #FF5A5F;
+}

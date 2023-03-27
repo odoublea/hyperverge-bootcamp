@@ -1,0 +1,39 @@
+section.listing {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+section.listing .box {
+    border: 1px #DDDDDD solid;
+    border-radius: 4px;
+    width: 250px;
+    /* height: 300px; */
+    margin-bottom: 30px;
+    /* padding: 10px; */
+}
+
+#airbnb-apartment-image {
+    content: url(../images/Beautiful-Airbnbs-in-Sydney--1500x965.jpg);
+    width: 100%;
+    border-radius: 4px;
+}
+
+.airbnb-image {
+    height: 70%;
+    margin-bottom: 5px;
+}
+
+.place-and-rating {
+    display: flex;
+    justify-content: space-between;
+}
+
+.summary p {
+    font-size: .8rem;
+    font-weight: 200;
+}
+
+.price-per-night {
+    margin-top: 5px;
+}
